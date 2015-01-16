@@ -174,6 +174,9 @@ Node/MobileNode instproc add-target { agent port } {
 
 	$agent set sport_ $port
 
+	#We get the numer of interfaces from the simulator object
+	set numIfsSimulator [$ns get-numifs]
+	
 	# special processing for TORA/IMEP node
 	set toraonly [string first "TORA" [$agent info class]] 
 	if {$toraonly != -1 } {
@@ -200,7 +203,13 @@ Node/MobileNode instproc add-target { agent port } {
 	#}
 	#</zheng: add>
 
-	if { $port == [Node set rtagent_port_] } {			
+	if { $port == [Node set rtagent_port_] } {
+		# Special processing when multiple interfaces are supported
+		if {$numIfsSimulator != ""} {
+			for {set i 0} {$i < [$self set nifs_]} {incr i} {
+				$agent if-queue $i [$self set ifq_($i)]
+			}
+		}
 		# Ad hoc routing agent setup needs special handling
 		$self add-target-rtagent $agent $port
 		return
