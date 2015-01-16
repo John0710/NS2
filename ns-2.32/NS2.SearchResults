@@ -1,0 +1,499 @@
+---- target Matches (544 in 68 files) ----
+Aodv.cc (aodv):    else if(strcmp(argv[1], "log-target") == 0 || strcmp(argv[1], "tracetarget") == 0) {
+Aodv.cc (aodv):    else if(strcmp(argv[1], "drop-target") == 0) {
+Arp.cc (emulate):ArpAgent::find(in_addr& target)
+Arp.cc (emulate):		if (ae->ip.s_addr == target.s_addr) {
+Arp.cc (emulate):ArpAgent::insert(in_addr& target, ether_addr& eaddr, char code)
+Arp.cc (emulate):	ae->ip = target;
+Arp.cc (emulate):ArpAgent::sendreq(in_addr& target)
+Arp.cc (emulate):	memcpy(ea->arp_tpa, &target, sizeof(target));
+Bi-connector.cc (common):		if (strcmp(argv[1], "up-target") == 0) {
+Bi-connector.cc (common):		if (strcmp(argv[1], "down-target") == 0) {
+Bi-connector.cc (common):		if (strcmp(argv[1], "drop-target") == 0) {
+Bi-connector.cc (common):		if (strcmp(argv[1], "up-target") == 0) {
+Bi-connector.cc (common):		if (strcmp(argv[1], "down-target") == 0) {
+Bi-connector.cc (common):		if (strcmp(argv[1], "drop-target") == 0) {
+CHANGES.html:Hooks for DelayLink object to have a drop-target. Currently no OTcl support
+CHANGES.html:method to drop-target. This should only affect the internal APIs and shouldn't
+CHANGES.html:C++ statically defined default drop-target and changed link building code
+CHANGES.html:to point a queue's drop-target to a null-agent.</li>
+Channel.cc (mac):		if (strcmp(argv[1], "trace-target") == 0) {
+Channel.cc (mac):		if (strcmp(argv[1], "trace-target") == 0) {
+Classifier-addr-mpls.cc (mpls):void MPLSAddressClassifier::install(int slot, NsObject *target) {
+Classifier-addr-mpls.cc (mpls):		if (strcmp(slot_[slot]->name(), target->name()) != 0)
+Classifier-addr-mpls.cc (mpls):	Classifier::install(slot,target);
+Classifier-addr-mpls.cc (mpls):			NsObject* target = (NsObject*)TclObject::lookup(argv[3]);
+Classifier-addr-mpls.cc (mpls):			install(slot,target);
+Classifier-addr-mpls.h (mpls):	virtual void install(int slot, NsObject *target);
+Classifier-hash.cc (classifier):void DestHashClassifier::do_install(char* dst, NsObject *target) {
+Classifier-hash.cc (classifier):	int slot = getnxt(target);
+Classifier-hash.cc (classifier):	install(slot, target); 
+Classifier-hash.h (classifier):	virtual void do_install(char *dst, NsObject *target);
+Classifier-hier.cc (classifier):void HierClassifier::do_install(char* dst, NsObject *target) {
+Classifier-hier.cc (classifier):	clsfr_[len-1]->install(istr[len-1], target);
+Classifier-hier.h (classifier):	virtual void do_install(char *dst, NsObject *target);
+Classifier-nix.cc (nix):			int target = atoi(argv[2]);
+Classifier-nix.cc (nix):					if ((nodeid_t)target == pN->Id())
+Classifier-virtual.cc (classifier):	virtual void do_install(char *dst, NsObject *target) { }
+Classifier.h (classifier):	virtual void do_install(char* dst, NsObject *target) {
+Classifier.h (classifier):		install(slot, target); }
+Connector.cc (common):		if (strcmp(argv[1], "target") == 0) {
+Connector.cc (common):		if (strcmp(argv[1], "drop-target") == 0) {
+Connector.cc (common):		if (strcmp(argv[1], "target") == 0) {
+Connector.cc (common):		if (strcmp(argv[1], "drop-target") == 0) {
+Connector.h (common):	inline NsObject* target() { return target_; }
+Connector.h (common):	void target (NsObject *target) { target_ = target; }
+Dsragent.cc (dsr):      if (strcasecmp(argv[1], "log-target") == 0)  {
+Dsred.cc (diffserv):  if (strcmp(argv[1], "early-drop-target") == 0) {
+Encapsulator.cc (common):		if (strcmp(argv[1], "decap-target") == 0) {
+Encapsulator.cc (common):		if (strcmp(argv[1], "decap-target") == 0) {
+Filter.cc (classifier):		if (strcmp(argv[1], "filter-target") == 0) {
+Filter.cc (classifier):		if (strcmp(argv[1], "filter-target") == 0) {
+Filter.cc (classifier):		if (strcmp(argv[1], "filter-target") == 0) {
+Filter.cc (classifier):		if (strcmp(argv[1], "filter-target") == 0) {
+Fq.cc (queue):	int target = -1;
+Fq.cc (queue):			if (target < 0) { 
+Fq.cc (queue):				target = i;
+Fq.cc (queue):					target = i;
+Fq.cc (queue):	if (target >= 0) {
+Fq.cc (queue):		Packet* p = fs_[target].hol_;
+Fq.cc (queue):		fs_[target].hol_ = 0;
+Fq.cc (queue):		fs_[target].finishTime_ = best;
+Fq.cc (queue):		Handler* h = fs_[target].handler_;
+Gear.cc (diffusion3\filters\gear):			    "Gear - Packet outside target region !\n");
+Gear.cc (diffusion3\filters\gear):		      "Gear - Packet inside target region !\n");
+Hackloss.cc (link):	if (strcmp(argv[1], "down-target") == 0) {
+Http.cc (webcache):			cnc->target() = (Process*)this;
+Icmp.cc (emulate):	void	sendredirect(in_addr& me, in_addr& target, in_addr& dest, in_addr& gw);
+Icmp.cc (emulate):IcmpAgent::sendredirect(in_addr& me, in_addr& target, in_addr& dst, in_addr& gw)
+Icmp.cc (emulate):	Internet::makeip(iph, iplen, ttl_, IPPROTO_ICMP, me, target);
+Icmp.cc (emulate):	Internet::makeip(dummyhdr, 20, 254, IPPROTO_GGP, target, dst);
+Imep.cc (imep):		else if(strcmp(argv[1], "log-target") == 0) {
+Jobs.cc (queue):	double k[NO_CLASSES+1], target[NO_CLASSES+1];
+Jobs.cc (queue):				target[i] = (double)k[i]/(double)c[i];
+Jobs.cc (queue):				available[i] = -(target[i] - n[i]); 
+Ll.cc (mac):		if (strcmp(argv[1], "down-target") == 0) {
+Ll.cc (mac):		if (strcmp(argv[1], "up-target") == 0) {
+Ll.cc (mac):		if (strcmp(argv[1], "down-target") == 0) {
+Ll.cc (mac):		if (strcmp(argv[1], "up-target") == 0) {
+Mac-802_11.cc (mac):		if (strcmp(argv[1], "eot-target") == 0) {
+Mac-802_11.cc (mac):		} else if (strcmp(argv[1], "log-target") == 0) { 
+Mac-tdma.cc (mac):		if (strcmp(argv[1], "log-target") == 0) {
+Mac.cc (mac):		else if (strcmp(argv[1], "log-target") == 0) {
+Media-app.cc (rap):		res = target()->get_data(nbytes, &p);
+Media-app.cc (rap):		res = target()->get_data(nbytes, req);
+Media-app.cc (rap):	AppData* res = target()->get_data(size, &q);
+Media-app.cc (rap):					      target()->name(), name());
+Media-app.cc (rap):	target()->get_data(dummy, &p);
+Mip-reg.cc (mobile):		if (strcmp(argv[1], "bcast-target") == 0) {
+Mip-reg.cc (mobile):void MIPBSAgent::send_ads(int dst, NsObject *target)
+Mip-reg.cc (mobile):	if (target == NULL) {
+Mip-reg.cc (mobile):	else target->recv(p, (Handler*)0);
+Mip-reg.cc (mobile):		else if (strcmp(argv[1], "bcast-target") == 0) {
+Mip-reg.cc (mobile):	NsObject *target = (NsObject *)tcl.lookup(tcl.result());
+Mip-reg.cc (mobile):	if (target != NULL)
+Mip.h (mobile):	void send_ads(int dst = -1, NsObject *target = NULL);
+Mobilenode.cc (common):		} else if(strcmp(argv[1], "log-target") == 0) {
+Mpls-module.cc (mpls):void MPLSModule::add_route(char *dst, NsObject *target) {
+Mpls-module.cc (mpls):		((MPLSAddressClassifier *)classifier_)->do_install(dst, target);
+Mpls-module.cc (mpls):		next_rtm_->add_route(dst, target); 
+Mpls-module.h (mpls):	virtual void add_route(char *dst, NsObject *target);
+Nixnode.cc (nix):  if(0)printf("Node %ld Getnix to target %ld, adjsize %lu\n",
+Node.cc (common):void Node::add_route(char *dst, NsObject *target) {
+Node.cc (common):		rtnotif_->add_route(dst, target);
+Node.h (common):	void add_route (char *dst, NsObject *target);
+Ns-process.cc (common):	if (strcmp(argv[1], "target") == 0) {
+Ns-process.cc (common):			Process *p = target();
+Ns-process.cc (common):			target() = p;
+Ns-process.h (common):	inline Process*& target() { return target_; }
+Ns_tcl.cc (gen):if { $hook == \"target\" } {\n\
+Ns_tcl.cc (gen):$clsfr target $classifier_\n\
+Ns_tcl.cc (gen):if { $hook == \"target\" } {\n\
+Ns_tcl.cc (gen):$clsfr target $hook_assoc($classifier_)\n\
+Ns_tcl.cc (gen):Node instproc add-route { dst target } {\n\
+Ns_tcl.cc (gen):$self add-target $agent $port\n\
+Ns_tcl.cc (gen):Node instproc add-target { agent port } {\n\
+Ns_tcl.cc (gen):$agent target $nullagent\n\
+Ns_tcl.cc (gen):RtModule instproc add-route { dst target } {\n\
+Ns_tcl.cc (gen):$agent target [[$self node] entry]\n\
+Ns_tcl.cc (gen):Classifier/Hier instproc install { dst target } {\n\
+Ns_tcl.cc (gen):RtModule/Manual instproc add-route {dst_address target} {\n\
+Ns_tcl.cc (gen):set target [$link head]\n\
+Ns_tcl.cc (gen):RtModule/VC instproc add-route { dst target } {\n\
+Ns_tcl.cc (gen):Classifier/Virtual instproc install {dst target} {\n\
+Ns_tcl.cc (gen):$encap_ target [$self entry]\n\
+Ns_tcl.cc (gen):Node/MobileNode instproc add-target { agent port } {\n\
+Ns_tcl.cc (gen):$self add-target-rtagent $agent $port\n\
+Ns_tcl.cc (gen):$sndT target [$self entry]\n\
+Ns_tcl.cc (gen):$agent target $sndT\n\
+Ns_tcl.cc (gen):$rcvT target $agent\n\
+Ns_tcl.cc (gen):$agent target [$self entry]\n\
+Ns_tcl.cc (gen):Node/MobileNode instproc add-target-rtagent { agent port } {\n\
+Ns_tcl.cc (gen):$agent target $imep_(0)\n\
+Ns_tcl.cc (gen):$sndT2 target $imep_(0)\n\
+Ns_tcl.cc (gen):$agent target $sndT2\n\
+Ns_tcl.cc (gen):$agent target $sndT\n\
+Ns_tcl.cc (gen):$sndT target [$self set ll_(0)]\n\
+Ns_tcl.cc (gen):[$self set ll_(0)] up-target $imep_(0)\n\
+Ns_tcl.cc (gen):$rcvT2 target $agent\n\
+Ns_tcl.cc (gen):$rcvT target $agent\n\
+Ns_tcl.cc (gen):$agent target $imep_(0)\n\
+Ns_tcl.cc (gen):$sndT2 target $imep_(0)\n\
+Ns_tcl.cc (gen):$agent target $sndT2\n\
+Ns_tcl.cc (gen):$agent target [$self set ll_(0)]\n\
+Ns_tcl.cc (gen):[$self set ll_(0)] up-target $imep_(0)\n\
+Ns_tcl.cc (gen):$rcvT2 target $agent\n\
+Ns_tcl.cc (gen):$imep drop-target $drpT\n\
+Ns_tcl.cc (gen):$arptable_ drop-target $drpT\n\
+Ns_tcl.cc (gen):$ll down-target $ifq\n\
+Ns_tcl.cc (gen):$ll up-target $imep\n\
+Ns_tcl.cc (gen):$ll up-target [$self entry]\n\
+Ns_tcl.cc (gen):$ifq target $mac\n\
+Ns_tcl.cc (gen):$ifq drop-target $drpT\n\
+Ns_tcl.cc (gen):$mac up-target $ll\n\
+Ns_tcl.cc (gen):$mac down-target $netif\n\
+Ns_tcl.cc (gen):$mac down-target $outerr\n\
+Ns_tcl.cc (gen):$outerr target $netif\n\
+Ns_tcl.cc (gen):$mac down-target $fec\n\
+Ns_tcl.cc (gen):$fec down-target $netif\n\
+Ns_tcl.cc (gen):$mac down-target $fec\n\
+Ns_tcl.cc (gen):$fec down-target $outerr\n\
+Ns_tcl.cc (gen):$err target $netif\n\
+Ns_tcl.cc (gen):$netif up-target $mac\n\
+Ns_tcl.cc (gen):$netif up-target $inerr\n\
+Ns_tcl.cc (gen):$inerr target $mac\n\
+Ns_tcl.cc (gen):$netif up-target $fec\n\
+Ns_tcl.cc (gen):$fec up-target $mac\n\
+Ns_tcl.cc (gen):$netif up-target $inerr\n\
+Ns_tcl.cc (gen):$inerr target $fec\n\
+Ns_tcl.cc (gen):$fec up-target $mac\n\
+Ns_tcl.cc (gen):$mac log-target $rcvT\n\
+Ns_tcl.cc (gen):$sndT target [$mac down-target]\n\
+Ns_tcl.cc (gen):$mac down-target $sndT\n\
+Ns_tcl.cc (gen):$rcvT target [$mac up-target]\n\
+Ns_tcl.cc (gen):$mac up-target $rcvT\n\
+Ns_tcl.cc (gen):$mac drop-target $drpT\n\
+Ns_tcl.cc (gen):$mac log-target [$ns set nullAgent_]\n\
+Ns_tcl.cc (gen):$mac drop-target [$ns set nullAgent_]\n\
+Ns_tcl.cc (gen):$mac eot-target $eotT\n\
+Ns_tcl.cc (gen):$T target [$ns nullagent]\n\
+Ns_tcl.cc (gen):$T target [[Simulator instance] set nullAgent_]\n\
+Ns_tcl.cc (gen):$self log-target $T    \n\
+Ns_tcl.cc (gen):$ragent drop-target $drpT\n\
+Ns_tcl.cc (gen):$T target [$ns set nullAgent_]\n\
+Ns_tcl.cc (gen):[$self set imep_(0)] log-target $T\n\
+Ns_tcl.cc (gen):$gafpartner_ target [$self entry]\n\
+Ns_tcl.cc (gen):$ll_(0) up-target $gafpartner_\n\
+Ns_tcl.cc (gen):$rcvT target $dsr_agent_\n\
+Ns_tcl.cc (gen):$dsr_agent_ target $dmux_\n\
+Ns_tcl.cc (gen):$sndT target $ll_(0)\n\
+Ns_tcl.cc (gen):Node/MobileNode/BaseStationNode instproc add-target {agent port } {\n\
+Ns_tcl.cc (gen):$sndT target [$self set ll_(0)]\n\
+Ns_tcl.cc (gen):$agent target $sndT\n\
+Ns_tcl.cc (gen):$rcvT target $agent\n\
+Ns_tcl.cc (gen):$agent target [$self set ll_(0)]\n\
+Ns_tcl.cc (gen):$sndT target [$self entry]\n\
+Ns_tcl.cc (gen):$agent target $sndT\n\
+Ns_tcl.cc (gen):$rcvT target $agent\n\
+Ns_tcl.cc (gen):$agent target [$self entry]\n\
+Ns_tcl.cc (gen):$connector target [$head_ target]\n\
+Ns_tcl.cc (gen):$head_ target $connector\n\
+Ns_tcl.cc (gen):$em target [$link_ target]\n\
+Ns_tcl.cc (gen):$link_ target $em\n\
+Ns_tcl.cc (gen):$drophead_ target [$ns set nullAgent_]\n\
+Ns_tcl.cc (gen):$head_ target [$q classifier]\n\
+Ns_tcl.cc (gen):$head_ target $q\n\
+Ns_tcl.cc (gen):$queue_ target $link_\n\
+Ns_tcl.cc (gen):$link_ target [$dst entry]\n\
+Ns_tcl.cc (gen):$queue_ drop-target $drophead_\n\
+Ns_tcl.cc (gen):$ttl_ target [$link_ target]\n\
+Ns_tcl.cc (gen):$link_ target $ttl_\n\
+Ns_tcl.cc (gen):$ttl_ target [$dst entry]\n\
+Ns_tcl.cc (gen):$iif_ target [$ttl_ target]\n\
+Ns_tcl.cc (gen):$ttl_ target $iif_\n\
+Ns_tcl.cc (gen):set nxt [$drophead_ target]\n\
+Ns_tcl.cc (gen):$drophead_ target $drpT_\n\
+Ns_tcl.cc (gen):$drpT_ target $nxt\n\
+Ns_tcl.cc (gen):$queue_ drop-target $drophead_\n\
+Ns_tcl.cc (gen):$deqT_ target [$queue_ target]\n\
+Ns_tcl.cc (gen):$queue_ target $deqT_\n\
+Ns_tcl.cc (gen):$rcvT_ target [$ttl_ target]\n\
+Ns_tcl.cc (gen):$ttl_ target $rcvT_\n\
+Ns_tcl.cc (gen):$ttl_ drop-target [lindex $args 0]\n\
+Ns_tcl.cc (gen):$ttl_ drop-target $drophead_\n\
+Ns_tcl.cc (gen):$link_ drop-target [lindex $args 0]\n\
+Ns_tcl.cc (gen):$link_ drop-target $drophead_\n\
+Ns_tcl.cc (gen):$dynamics_ drop-target [lindex $args 0]\n\
+Ns_tcl.cc (gen):$dynamics_ drop-target $drophead_\n\
+Ns_tcl.cc (gen):$snoopOut_ target [$queue_ target]\n\
+Ns_tcl.cc (gen):$queue_ target $snoopOut_\n\
+Ns_tcl.cc (gen):set nxt [$drophead_ target]\n\
+Ns_tcl.cc (gen):$drophead_ target $snoopDrop_\n\
+Ns_tcl.cc (gen):$snoopDrop_ target $nxt\n\
+Ns_tcl.cc (gen):$snoopIn_ target $head_\n\
+Ns_tcl.cc (gen):$em drop-target $drophead_\n\
+Ns_tcl.cc (gen):$em target [$deqT_ target]\n\
+Ns_tcl.cc (gen):$deqT_ target $em\n\
+Ns_tcl.cc (gen):$em target [$queue_ target]\n\
+Ns_tcl.cc (gen):$queue_ target $em\n\
+Ns_tcl.cc (gen):$em drop-target $drophead_\n\
+Ns_tcl.cc (gen):$head_ target $classifier_\n\
+Ns_tcl.cc (gen):$in target $qdisc\n\
+Ns_tcl.cc (gen):$cbqcl target $in\n\
+Ns_tcl.cc (gen):$qdisc drop-target $drop\n\
+Ns_tcl.cc (gen):$drop target $drophead_\n\
+Ns_tcl.cc (gen):$qdisc target $out\n\
+Ns_tcl.cc (gen):$out target $queue_\n\
+Ns_tcl.cc (gen):$recons target $queue_\n\
+Ns_tcl.cc (gen):$head_ target $classifier_\n\
+Ns_tcl.cc (gen):$q drop-target $drpT_\n\
+Ns_tcl.cc (gen):$q target $queue_\n\
+Ns_tcl.cc (gen):$self early-drop-target $edsnoop \n\
+Ns_tcl.cc (gen):$edsnoop target [$ns set nullAgent_]\n\
+Ns_tcl.cc (gen):$self drop-target $dsnoop\n\
+Ns_tcl.cc (gen):$newtrace target $oldTrace\n\
+Ns_tcl.cc (gen):$newtrace target [$ns set nullAgent_]\n\
+Ns_tcl.cc (gen):$medtrace target $oldTrace\n\
+Ns_tcl.cc (gen):$medtrace target [$ns set nullAgent_]\n\
+Ns_tcl.cc (gen):$delayer_ target [$queue_ target]\n\
+Ns_tcl.cc (gen):$queue_ target $delayer_\n\
+Ns_tcl.cc (gen):for {set c [$ln head]} {$c != $nbr} {set c [$c target]} {\n\
+Ns_tcl.cc (gen):$tbf target [$self target]\n\
+Ns_tcl.cc (gen):$self target $tbf\n\
+Ns_tcl.cc (gen):$tbf target [$self target]\n\
+Ns_tcl.cc (gen):$self target $tbf\n\
+Ns_tcl.cc (gen):$self ctrl-target [$tbf target]\n\
+Ns_tcl.cc (gen):$self cmd target [new Connector]\n\
+Ns_tcl.cc (gen):$self cmd drop-target [new Connector]\n\
+Ns_tcl.cc (gen):set target [$self cmd target]\n\
+Ns_tcl.cc (gen):$errmodel target [$self cmd target]\n\
+Ns_tcl.cc (gen):$errmodel drop-target [$self cmd drop-target]\n\
+Ns_tcl.cc (gen):ErrorModule instproc target args {\n\
+Ns_tcl.cc (gen):return [[$self cmd target] target]\n\
+Ns_tcl.cc (gen):[$self cmd target] target $obj\n\
+Ns_tcl.cc (gen):[$self cmd target] drop-target $obj\n\
+Ns_tcl.cc (gen):ErrorModule instproc drop-target args {\n\
+Ns_tcl.cc (gen):return [[$self cmd drop-target] target]\n\
+Ns_tcl.cc (gen):[$self cmd drop-target] drop-target $obj\n\
+Ns_tcl.cc (gen):[$self cmd drop-target] target $obj\n\
+Ns_tcl.cc (gen):$measmod_ target $queue_\n\
+Ns_tcl.cc (gen):$signalmod_ target $measclassifier_\n\
+Ns_tcl.cc (gen):Node/Broadcast instproc add-route { dst target } {\n\
+Ns_tcl.cc (gen):Node/Broadcast instproc add-target { agent port } {\n\
+Ns_tcl.cc (gen):$agent target [$self entry]\n\
+Ns_tcl.cc (gen):$encap_ target [$self entry]\n\
+Ns_tcl.cc (gen):$self bcast-target $BcastTarget_\n\
+Ns_tcl.cc (gen):Agent/MIPBS instproc decap-route { mhaddr target lifetime } {\n\
+Ns_tcl.cc (gen):$self bcast-target $BcastTarget_\n\
+Ns_tcl.cc (gen):Node/SatNode instproc add-target {agent port } {\n\
+Ns_tcl.cc (gen):$agent target [$self entry]\n\
+Ns_tcl.cc (gen):$phy_rx_($t) up-target $phy_tx_($t)\n\
+Ns_tcl.cc (gen):set drophead_($t) [new Connector]	;# drop target for queue\n\
+Ns_tcl.cc (gen):$linkhead target $ll; \n\
+Ns_tcl.cc (gen):$iif target [$self entry]\n\
+Ns_tcl.cc (gen):$ll up-target $iif\n\
+Ns_tcl.cc (gen):$ll down-target $ifq\n\
+Ns_tcl.cc (gen):$ifq target $mac\n\
+Ns_tcl.cc (gen):$drophead target [[Simulator instance] set nullAgent_]\n\
+Ns_tcl.cc (gen):$ifq drop-target $drophead\n\
+Ns_tcl.cc (gen):$mac up-target $ll\n\
+Ns_tcl.cc (gen):$mac down-target $phy_tx\n\
+Ns_tcl.cc (gen):$phy_rx up-target $mac\n\
+Ns_tcl.cc (gen):$mac_($index) up-target $em\n\
+Ns_tcl.cc (gen):$em target $ll_($index)\n\
+Ns_tcl.cc (gen):$em drop-target [new Agent/Null]; # otherwise, packet is only marked\n\
+Ns_tcl.cc (gen):$self attach $ragent 255; # attaches to default target of classifier  \n\
+Ns_tcl.cc (gen):$link_($src:$dst) target $handle\n\
+Ns_tcl.cc (gen):$enqT_($index_) target $ifq_($index_)\n\
+Ns_tcl.cc (gen):$ll_($index_) down-target $enqT_($index_)\n\
+Ns_tcl.cc (gen):$deqT_($index_) target $mac_($index_)\n\
+Ns_tcl.cc (gen):$ifq_($index_) target $deqT_($index_)\n\
+Ns_tcl.cc (gen):$drpT_($index_) target [$drophead_($index_) target]\n\
+Ns_tcl.cc (gen):$drophead_($index_) target $drpT_($index_)\n\
+Ns_tcl.cc (gen):$ifq_($index_) drop-target $drpT_($index_)\n\
+Ns_tcl.cc (gen):$errT_($index_) target [$em_($index_) drop-target]\n\
+Ns_tcl.cc (gen):$em_($index_) drop-target $errT_($index_)\n\
+Ns_tcl.cc (gen):$rcvT_($index_) target [$em_($index_) target]\n\
+Ns_tcl.cc (gen):$em_($index_) target $rcvT_($index_)\n\
+Ns_tcl.cc (gen):$rcvT_($index_) target [$mac_($index_) up-target]\n\
+Ns_tcl.cc (gen):$mac_($index_) up-target $rcvT_($index_)\n\
+Ns_tcl.cc (gen):$self target $mclass_\n\
+Ns_tcl.cc (gen):$ll_ up-target $iface_\n\
+Ns_tcl.cc (gen):$ll_ down-target $ifq_\n\
+Ns_tcl.cc (gen):$ifq_ target $mac_\n\
+Ns_tcl.cc (gen):$mac_ up-target $ll_\n\
+Ns_tcl.cc (gen):$mac_ down-target $phy_\n\
+Ns_tcl.cc (gen):$phy_ up-target $mac_\n\
+Ns_tcl.cc (gen):$iface_ target [$node entry]\n\
+Ns_tcl.cc (gen):$entry_ target $ll_\n\
+Ns_tcl.cc (gen):$drophead_ target [$ns set nullAgent_]\n\
+Ns_tcl.cc (gen):$ifq_ drop-target $drophead_ \n\
+Ns_tcl.cc (gen):$mac_ drop-target $drophead_ \n\
+Ns_tcl.cc (gen):$ll_ drop-target $drophead_\n\
+Ns_tcl.cc (gen):$mac_ drop-target $macdrophead_\n\
+Ns_tcl.cc (gen):$macdrophead_ target $macdrpT_\n\
+Ns_tcl.cc (gen):$hopT_ target [$entry_ target]\n\
+Ns_tcl.cc (gen):$entry_ target $hopT_\n\
+Ns_tcl.cc (gen):$rcvT_ target [$iface_ target]\n\
+Ns_tcl.cc (gen):$iface_ target $rcvT_\n\
+Ns_tcl.cc (gen):$enqT_ target [$ll_ down-target]\n\
+Ns_tcl.cc (gen):$ll_ down-target $enqT_\n\
+Ns_tcl.cc (gen):$deqT_ target [$ifq_ target]\n\
+Ns_tcl.cc (gen):$ifq_ target $deqT_\n\
+Ns_tcl.cc (gen):$drpT_ target [$drophead_ target]\n\
+Ns_tcl.cc (gen):$drophead_ target $drpT_\n\
+Ns_tcl.cc (gen):$filter target [$mac_ target]\n\
+Ns_tcl.cc (gen):$mac_ target $filter\n\
+Ns_tcl.cc (gen):$q_ target $dlink_\n\
+Ns_tcl.cc (gen):$dlink_ target $mcl_\n\
+Ns_tcl.cc (gen):$q_ drop-target [$nif set drophead_]\n\
+Ns_tcl.cc (gen):$deqT_ target $dlink_\n\
+Ns_tcl.cc (gen):$q_ target $deqT_\n\
+Ns_tcl.cc (gen):$entry_ target $ll_\n\
+Ns_tcl.cc (gen):$ll_ up-target [$node entry]\n\
+Ns_tcl.cc (gen):$ll_ down-target $mac_\n\
+Ns_tcl.cc (gen):$mac_ up-target $ll_\n\
+Ns_tcl.cc (gen):$mac_ down-target [$lan set q_]\n\
+Ns_tcl.cc (gen):$drophead_ target [$ns set nullAgent_]\n\
+Ns_tcl.cc (gen):$mac_ drop-target $drophead_\n\
+Ns_tcl.cc (gen):$ll_ drop-target $drophead_\n\
+Ns_tcl.cc (gen):$hopT_ target [$entry_ target]\n\
+Ns_tcl.cc (gen):$entry_ target $hopT_\n\
+Ns_tcl.cc (gen):$rcvT_ target [$ll_ up-target]\n\
+Ns_tcl.cc (gen):$ll_ up-target $rcvT_\n\
+Ns_tcl.cc (gen):$enqT_ target [$mac_ down-target]\n\
+Ns_tcl.cc (gen):$mac_ down-target $enqT_\n\
+Ns_tcl.cc (gen):$drpT_ target [$drophead_ target]\n\
+Ns_tcl.cc (gen):$drophead_ target $drpT_\n\
+Ns_tcl.cc (gen):Classifier/Replicator/Demuxer instproc insert target {\n\
+Ns_tcl.cc (gen):foreach target [array names active_] {\n\
+Ns_tcl.cc (gen):Classifier/Replicator/Demuxer instproc disable target {\n\
+Ns_tcl.cc (gen):Classifier/Replicator/Demuxer instproc enable target {\n\
+Ns_tcl.cc (gen):Classifier/Replicator/Demuxer instproc exists target {\n\
+Ns_tcl.cc (gen):Classifier/Replicator/Demuxer instproc is-active-target target {\n\
+Ns_tcl.cc (gen):foreach { target slot } [array get active_] {\n\
+Ns_tcl.cc (gen):if { [$r is-active-target $tmpoif] } {\n\
+Ns_tcl.cc (gen):set target $src\n\
+Ns_tcl.cc (gen):set target [$self get_rp $nodeh $group]\n\
+Ns_tcl.cc (gen):set target $src\n\
+Ns_tcl.cc (gen):set target [$self get_rp $nodeh $group]\n\
+Ns_tcl.cc (gen):$tg_ target $self\n\
+Ns_tcl.cc (gen):$front_filter_ filter-target $front_counter_\n\
+Ns_tcl.cc (gen):$rear_filter_ filter-target $rear_counter_\n\
+Ns_tcl.cc (gen):while {[$tmp target] != [$link link]} {\n\
+Ns_tcl.cc (gen):set tmp [$tmp target]\n\
+Ns_tcl.cc (gen):$tmp target $front_filter_\n\
+Ns_tcl.cc (gen):$front_filter_ target [$link link]\n\
+Ns_tcl.cc (gen):$front_counter_ target [$link link]\n\
+Ns_tcl.cc (gen):$rear_filter_ target [[$link link] target]\n\
+Ns_tcl.cc (gen):$rear_counter_ target [[$link link] target]\n\
+Ns_tcl.cc (gen):[$link link] target $rear_filter_\n\
+Ns_tcl.cc (gen):$srcAgent target $p\n\
+Ns_tcl.cc (gen):$p target $session_($nid:$dst:$nid)\n\
+Ns_tcl.cc (gen):$srcAgent target $session_($nid:$dst:$nid)\n\
+Ns_tcl.cc (gen):$p target $rcvAgent\n\
+Ns_tcl.cc (gen):set mbr [$mbr target]\n\
+Ns_tcl.cc (gen):$p target $session_($src:$group:$nid)\n\
+Ns_tcl.cc (gen):$p target $rcvAgent\n\
+Ns_tcl.cc (gen):$p target [$Node_($tmp) entry]\n\
+Ns_tcl.cc (gen):$app target $self\n\
+Ns_tcl.cc (gen):$app target $self \n\
+Ns_tcl.cc (gen):$app target $self\n\
+Ns_tcl.cc (gen):$app target $self \n\
+Ns_tcl.cc (gen):$ragent drop-target $drpT\n\
+Ns_tcl.cc (gen):$T target [$ns_ set nullAgent_]\n\
+Ns_tcl.cc (gen):$T target [$ns_ set nullAgent_]\n\
+Ns_tcl.cc (gen):$node log-target $T\n\
+Ns_tcl.cc (gen):$rcvT target $dsr_agent_\n\
+Ns_tcl.cc (gen):$dsr_agent_ drop-target $drpT\n\
+Ns_tcl.cc (gen):$T target [$ns_ set nullAgent_]\n\
+Ns_tcl.cc (gen):$dsr_agent_ log-target $T\n\
+Ns_tcl.cc (gen):$dsr_agent_ target $dmux_\n\
+Ns_tcl.cc (gen):$sndT target $ll_(0)\n\
+Ns_tcl.cc (gen):$T target [$ns_ set nullAgent_]\n\
+Ns_tcl.cc (gen):$node log-target $T\n\
+Ns_tcl.cc (gen):$sndT target $ll_(0)\n\
+Ns_tcl.cc (gen):$T target [$ns_ set nullAgent_]\n\
+Ns_tcl.cc (gen):$rldrop_trace target $oldTrace\n\
+Ns_tcl.cc (gen):$rldrop_trace target [$ns set nullAgent_]\n\
+Ns_tcl.cc (gen):$head target [$lossobj target]\n\
+Ns_tcl.cc (gen):$head target [$lossobj target]\n\
+Ns_tcl.cc (gen):$t target $obj\n\
+Ns_tcl.cc (gen):[$link_([$n1 id]:[$n2 id]) queue] drop-target $trace\n\
+Ns_tcl.cc (gen):puts stderr \"\\t$self: no target for slot $slot\"\n\
+Ns_tcl.cc (gen):[$lnk queue] early-drop-target $edsnoop\n\
+Ns_tcl.cc (gen):$edsnoop target [$self set nullAgent_]\n\
+Ns_tcl.cc (gen):[$lnk queue] drop-target $dsnoop\n\
+P802_15_4mac.cc (wpan):		if (strcmp(argv[1], "log-target") == 0)
+Parentnode.cc (common):void BroadcastNode::add_route(char *dst, NsObject *target) {
+Parentnode.cc (common):  classifier_->do_install(dst,target);
+Parentnode.h (common):	virtual void add_route (char *dst, NsObject *target);
+Pgm-howto.txt (pgm):   $loss_module drop-target [$ns set nullAgent_]
+Pi.cc (queue):		if (strcmp(argv[1], "early-drop-target") == 0) {
+Pi.cc (queue):		if (strcmp(argv[1], "early-drop-target") == 0) {
+Pushback.cc (pushback):  sprintf(prnMsg,"Refresh. target=%g limit=%g floor=%g\n", targetRate, requiredLimit_,
+Queue.cc (queue):void PacketQueue::remove(Packet* target)
+Queue.cc (queue):		if (p == target) {
+Queue.cc (queue):	fprintf(stderr, "PacketQueue:: remove() couldn't find target\n");
+README.txt (src_rtg):   or UDP) you need to set the target of the agent to the source routing
+README.txt (src_rtg):	> $tcp target [$n1 set src_agent_]
+README.txt (src_rtg):$cbr1 target [$n3 set src_agent_]
+README.txt (src_rtg):$cbr0 target [$n0 set src_agent_]
+README.txt (src_rtg):$cbr1 target [$n3 set src_agent_]
+README.txt (src_rtg):$cbr0 target [$n0 set src_agent_]
+README.txt (src_rtg):$cbr1 target [$n3 set src_agent_]
+README.txt (src_rtg):$cbr0 target [$n0 set src_agent_]
+README.txt (src_rtg):$cbr1 target [$n3 set src_agent_]
+README.txt (src_rtg):$cbr0 target [$n0 set src_agent_]
+README.txt (src_rtg):$cbr1 target [$n3 set src_agent_]
+README.txt (src_rtg):$cbr0 target [$n0 set src_agent_]
+README.txt (src_rtg):$cbr0 target [$n0 set src_agent_]
+README.txt (src_rtg):$cbr1 target [$n3 set src_agent_]
+README.txt (src_rtg):$cbr0 target [$n0 set src_agent_]
+README.txt (src_rtg):$cbr1 target [$n3 set src_agent_]
+Red-pd.h (queue):	double getP_monFlow(double current, double target) {
+Red-pd.h (queue):		if (current <= 0 || current < target) 
+Red-pd.h (queue):		return 1 - (target/current);
+Red-pd.h (queue):	RedPDFlow(double target, double current) {
+Red-pd.h (queue):		targetBW_ = target;
+Red-pd.h (queue):	void set(double target, double current) {
+Red-pd.h (queue):		targetBW_ = target;
+Red.cc (queue):		if (strcmp(argv[1], "early-drop-target") == 0) {
+Red.cc (queue):		if (strcmp(argv[1], "early-drop-target") == 0) {
+Route.cc (routing):	char target[SMALL_LEN];
+Route.cc (routing):		get_address(target, next_hop, index, d, size, src);
+Route.cc (routing):		tcl.result(target);
+Route.cc (routing):		result= Address::instance().str2addr(target);
+Route.h (routing):	void get_address(char * target, int next_hop, int index, int d, int size, int *src);
+Routecache.cc (dsr):      if(strcasecmp(argv[1], "log-target") == 0 || 
+Rtmodule.cc (routing):void RoutingModule::add_route(char *dst, NsObject *target) 
+Rtmodule.cc (routing):		classifier_->do_install(dst,target); 
+Rtmodule.cc (routing):		next_rtm_->add_route(dst, target); 
+Rtmodule.cc (routing):void ManualRoutingModule::add_route(char *dst, NsObject *target) {
+Rtmodule.cc (routing):	int slot = classifier_->install_next(target);
+Rtmodule.cc (routing):		next_rtm_->add_route(dst, target); 
+Rtmodule.h (routing):	virtual void add_route(char *dst, NsObject *target); 
+Rtmodule.h (routing):	void add_route(char *dst, NsObject *target);
+Rtmodule.h (routing):	virtual void add_route(char *dst, NsObject *target){}
+Sa.cc (adc):		if (strcmp(argv[1], "target") == 0) {
+Sa.cc (adc):		else if (strcmp(argv[1],"ctrl-target")== 0) {
+Sathandoff.cc (satellite):		printf("Error:  This ISL channel has more than one target\n");
+Sathandoff.cc (satellite):		printf("Error:  This ISL channel has more than one target\n");
+Satroute.cc (satellite):			  is a channel target\n");
+Satroute.cc (satellite):			          is a channel target\n");
+Satroute.cc (satellite):	NsObject *target;
+Satroute.cc (satellite):				target = (NsObject*) lookup_entry(src, dst);
+Satroute.cc (satellite):				if (target == 0) {
+Satroute.cc (satellite):					printf("Error, routelogic target ");
+Satroute.cc (satellite):				    next_hop, target); 
+Smac.cc (mac):		if (strcmp(argv[1], "log-target") == 0) {
+Sragent.cc (src_rtg):	    if((strcmp(argv[1], "target") == 0))
+Sragent.cc (src_rtg):		  tcl.resultf("no such target %s", argv[2]);
+Sragent.cc (src_rtg):		tcl.resultf(" The target is successfully set");
+Sr_forwarder.cc (dsr):      if (strcmp(argv[1], "target") == 0) {
+Sr_forwarder.cc (dsr):      else if (strcasecmp(argv[1], "target") == 0) 
+Tap.cc (emulate):		TDEBUG4("%f: Tap(%s): recvpkt, writing to target: %s\n",
+Tcpapp.cc (webcache):	if (target())
+Tora.cc (tora):		if(strcmp(argv[1], "log-target") == 0 || strcmp(argv[1], "tracetarget") == 0 ) {
+Tora.cc (tora):		else if(strcmp(argv[1], "drop-target") == 0) {
+Xcp.cc (xcp):		else if (strcmp(argv[1], "drop-target") == 0) {
