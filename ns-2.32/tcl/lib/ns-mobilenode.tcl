@@ -65,7 +65,7 @@ Node/MobileNode instproc init args {
 	set X_ 0.0
 	set Y_ 0.0
 	set Z_ 0.0
-        set arptable_ ""                ;# no ARP table yet
+       # set arptable_ ""                ;# no ARP table yet
 	set nifs_	0		;# number of network interfaces
 	# Mobile IP node processing
         $self makemip-New$nodetype_
@@ -155,10 +155,13 @@ Node/MobileNode instproc reset {} {
 		if { [info exists opt(imep)] && $opt(imep) == "ON" } { 
 			$imep_($i) reset 
 		}
+		if {$arptable_($i) != ""} {
+			$arptable_($i) reset
+		}
 	}
-	if { $arptable_ != "" } {
-		$arptable_ reset 
-	}
+	#if { $arptable_ != "" } {
+		#$arptable_ reset 
+	#}
 }
 
 #
@@ -256,6 +259,7 @@ Node/MobileNode instproc add-target { agent port } {
 	}
 }
 
+#Listing 3.8 Changes on add-target-rtagent procedure
 Node/MobileNode instproc add-target-rtagent { agent port } {
 	$self instvar imep_ toraDebug_ 
 
@@ -266,6 +270,9 @@ Node/MobileNode instproc add-target-rtagent { agent port } {
 	set dmux_ [$self demux]
 	set classifier_ [$self entry]
 
+	#We see whether we have multiple interfaces in the simulation
+	set numIfsSimulator [$ns get-numifs]
+	
 	# let the routing agent know about the port dmux
 	$agent port-dmux $dmux_
 
@@ -291,10 +298,20 @@ Node/MobileNode instproc add-target-rtagent { agent port } {
 				$sndT2 target $imep_(0)
 				$agent target $sndT2
 			}
+			$sndT target [$self set ll_(0)]
 		} else {  ;#  no IMEP
-			$agent target $sndT
+			if {$numIfsSimulator != ""} {
+				for {set i 0} {$i < [$self set nifs_]} {incr i} {
+					set sndT [cmu-trace Send "RTR" $self]
+					$agent target $i $sndT
+					$sndT target [$self set ll_($i)]
+				}
+			} else {
+				$agent target $sndT
+				$sndT target [$self set ll_(0)]
+			}	
 		}
-		$sndT target [$self set ll_(0)]
+		
 		#
 		# Recv Target
 		#
@@ -339,7 +356,13 @@ Node/MobileNode instproc add-target-rtagent { agent port } {
 			$imep_(0) sendtarget [$self set ll_(0)]
 			
 		} else {  ;#  no IMEP
-			$agent target [$self set ll_(0)]
+			if {$numIfsSimulator != ""} {
+				for {set i 0} {$i < [$self set nifs_]} {incr i} {
+					$agent target $i [$self set ll_($i)]
+				}
+			} else {
+				$agent target [$self set ll_(0)]
+			}
 		}    
 		#
 		# Recv Target
@@ -366,6 +389,7 @@ Node/MobileNode instproc add-target-rtagent { agent port } {
 # The following setups up link layer, mac layer, network interface
 # and physical layer structures for the mobile node.
 #
+#Listring 3.9 Changes on add-interface procedure
 Node/MobileNode instproc add-interface { channel pmodel lltype mactype qtype qlen iftype anttype topo inerrproc outerrproc fecproc } {
 	$self instvar arptable_ nifs_ netif_ mac_ ifq_ ll_ imep_ inerr_ outerr_ fec_
 	
@@ -419,26 +443,43 @@ Node/MobileNode instproc add-interface { channel pmodel lltype mactype qtype qle
 	set outerr $outerr_($t)
 	set fec $fec_($t)
 
-	#
-	# Initialize ARP table only once.
-	#
-	if { $arptable_ == "" } {
-		set arptable_ [new ARPTable $self $mac]
-		# FOR backward compatibility sake, hack only
-		if {$imepflag != ""} {
-			set drpT [$self mobility-trace Drop "IFQ"]
-		} else {
-			set drpT [cmu-trace Drop "IFQ" $self]
-		}
-		$arptable_ drop-target $drpT
-		if { $namfp != "" } {
-			$drpT namattach $namfp
-		}
-        }
+	#We also create one ARP table per interface
+	set arptable_($t) [new ARPTable $self $mac]
+	set arptable $arptable_($t)
+
+	if {$imepflag != ""} {
+		set drpT [$self mobility-trace Drop "IFQ"]
+	} else {
+		set drpT [cmu-trace Drop "IFQ" $self]
+	}
+	$arptable drop-target $drpT
+	if {$namfp != ""} {
+		$drpT namattach $namfp
+	}
+
+	###xb comment begin
+	##
+	## Initialize ARP table only once.
+	##
+	#if { $arptable_ == "" } {
+		#set arptable_ [new ARPTable $self $mac]
+		## FOR backward compatibility sake, hack only
+		#if {$imepflag != ""} {
+			#set drpT [$self mobility-trace Drop "IFQ"]
+		#} else {
+			#set drpT [cmu-trace Drop "IFQ" $self]
+		#}
+		#$arptable_ drop-target $drpT
+		#if { $namfp != "" } {
+			#$drpT namattach $namfp
+		#}
+        #}
+        ##xb comment end
+        
 	#
 	# Link Layer
 	#
-	$ll arptable $arptable_
+	$ll arptable $arptable
 	$ll mac $mac
 	$ll down-target $ifq
 
