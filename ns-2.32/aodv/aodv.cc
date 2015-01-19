@@ -130,6 +130,34 @@ AODV::command(int argc, const char*const* argv) {
 	return TCL_OK;
     }
   }
+  //Listing 5.10 Changes on the command method
+  else if(argc == 4) {
+	if(strcmp(argv[1], "if-queue") == 0) {
+		PriQueue* ifq = (PriQueue*)TclObject::lookup(argv[3]);
+		int temp_ = atoi(argv[2]);
+		if(temp_ == nIfaces) {
+			nIfaces++;
+		}
+		ifqueuelist[temp_] = ifq;
+		if(ifqueuelist[temp_]) {
+			return TCL_OK;
+		} else {
+			return TCL_ERROR;
+		}	
+	}
+	if(strcmp(argv[1], "target") == 0) {
+		int temp_ = atoi(argv[2]);
+		if(temp_ == nIfaces) {
+			nIfaces++;
+		}
+		targetlist[temp_] = (NsObject *)TclObject::lookup(argv[3]);
+		if(targetlist[temp_]) {
+			return TCL_OK;
+		} else {
+			return TCL_ERROR;
+		}
+	}
+  }
   return Agent::command(argc, argv);
 }
 
@@ -151,6 +179,7 @@ AODV::AODV(nsaddr_t id) : Agent(PT_AODV),
 
   logtarget = 0;
   ifqueue = 0;
+  nIfaces = 0;
 }
 
 /*
@@ -403,13 +432,14 @@ AODV::local_rt_repair(aodv_rt_entry *rt, Packet *p) {
 
 void
 AODV::rt_update(aodv_rt_entry *rt, u_int32_t seqnum, u_int16_t metric,
-	       	nsaddr_t nexthop, double expire_time) {
+	       	nsaddr_t nexthop, double expire_time, u_int8_t interface) {
 
      rt->rt_seqno = seqnum;
      rt->rt_hops = metric;
      rt->rt_flags = RTF_UP;
      rt->rt_nexthop = nexthop;
      rt->rt_expire = expire_time;
+	 rt->rt_interface = interface;
 }
 
 void
@@ -647,10 +677,13 @@ AODV::recvAODV(Packet *p) {
 }
 
 
+//Listing 5.16 Changes on the recvRequest method
 void
 AODV::recvRequest(Packet *p) {
 struct hdr_ip *ih = HDR_IP(p);
+struct hdr_cmn *ch = HDR_CMN(p);
 struct hdr_aodv_request *rq = HDR_AODV_REQUEST(p);
+u_int8_t Iface;
 aodv_rt_entry *rt;
 
   /*
@@ -704,8 +737,18 @@ aodv_rt_entry *rt;
 	 (rq->rq_hop_count < rt0->rt_hops)) ) {
    // If we have a fresher seq no. or lesser #hops for the 
    // same seq no., update the rt entry. Else don't bother.
+
+if(nIfaces)
+{
+	Iface = ch->iface()-((Mac*)ifqueuelist[0]->target())->addr();
+}
+else
+{
+	Iface = -1;
+}
+
 rt_update(rt0, rq->rq_src_seqno, rq->rq_hop_count, ih->saddr(),
-     	       max(rt0->rt_expire, (CURRENT_TIME + REV_ROUTE_LIFE)) );
+     	       max(rt0->rt_expire, (CURRENT_TIME + REV_ROUTE_LIFE)), Iface);
      if (rt0->rt_req_timeout > 0.0) {
      // Reset the soft state and 
      // Set expiry time to CURRENT_TIME + ACTIVE_ROUTE_TIMEOUT
@@ -817,11 +860,13 @@ rt_update(rt0, rq->rq_src_seqno, rq->rq_hop_count, ih->saddr(),
 }
 
 
+//Listing 5.17 Changes on the recvReply method
 void
 AODV::recvReply(Packet *p) {
-//struct hdr_cmn *ch = HDR_CMN(p);
+struct hdr_cmn *ch = HDR_CMN(p);
 struct hdr_ip *ih = HDR_IP(p);
 struct hdr_aodv_reply *rp = HDR_AODV_REPLY(p);
+u_int8_t Iface;
 aodv_rt_entry *rt;
 char suppress_reply = 0;
 double delay = 0.0;
@@ -858,9 +903,17 @@ double delay = 0.0;
       ((rt->rt_seqno == rp->rp_dst_seqno) &&  
        (rt->rt_hops > rp->rp_hop_count)) ) { // shorter or better route
 	
-  // Update the rt entry 
+  // Update the rt entry
+	if(nIfaces)
+	{
+		Iface = ch->iface()-((Mac*)ifqueuelist[0]->target())->addr();
+	}
+	else
+	{
+		Iface = -1;
+	}  
   rt_update(rt, rp->rp_dst_seqno, rp->rp_hop_count,
-		rp->rp_src, CURRENT_TIME + rp->rp_lifetime);
+		rp->rp_src, CURRENT_TIME + rp->rp_lifetime, Iface);
 
   // reset the soft state
   rt->rt_req_cnt = 0;
@@ -1033,25 +1086,72 @@ struct hdr_ip *ih = HDR_IP(p);
 if (ih->daddr() == (nsaddr_t) IP_BROADCAST) {
  // If it is a broadcast packet
    assert(rt == 0);
-   /*
+   if(ch->ptype() == PT_AODV)
+   {
+  /*
     *  Jitter the sending of broadcast packets by 10ms
     */
-   Scheduler::instance().schedule(target_, p,
-      				   0.01 * Random::uniform());
+   //Scheduler::instance().schedule(target_, p,
+     // 				   0.01 * Random::uniform());    
+	   if(nIfaces) {
+		   for(int i=0; i<nIfaces; i++) {
+			   Packet* p_copy = p->copy();
+			   Scheduler::instance().schedule(targetlist[i], p_copy, 0.01*Random::uniform());
+		   }
+		   Packet::free(p);
+	   } 
+	   else
+	   {
+		   Scheduler::instance().schedule(target_, p, 0.01*Random::uniform());
+	   }     
+   }
+   else
+   {
+	   if(nIfaces) {
+		   for(int i=0; i<nIfaces; i++) {
+			   Packet* p_copy = p->copy();
+			   Scheduler::instance().schedule(targetlist[i], p_copy, 0.0);
+		   }
+		   Packet::free(p);
+	   }  
+	   else
+	   {
+		   Scheduler::instance().schedule(target_, p, 0.0);
+	   } 	
+   }
+
+
+  
  }
  else { // Not a broadcast packet 
    if(delay > 0.0) {
-     Scheduler::instance().schedule(target_, p, delay);
+     //Scheduler::instance().schedule(target_, p, delay);
+     if(nIfaces)
+     {
+     	Scheduler::instance().schedule(targetlist[rt->rt_interface], p, delay);
+     }
+	 else
+	 {
+	 	Scheduler::instance().schedule(target_, p, delay);
+	 }
    }
    else {
    // Not a broadcast packet, no delay, send immediately
-     Scheduler::instance().schedule(target_, p, 0.);
+	   if(nIfaces)
+	   {
+		  Scheduler::instance().schedule(targetlist[rt->rt_interface], p, 0);
+	   }
+	   else
+	   {
+		  Scheduler::instance().schedule(target_, p, 0);
+	   }
    }
  }
 
 }
 
 
+//Listing 5.11 Changes on the sendRequest method
 void
 AODV::sendRequest(nsaddr_t dst) {
 // Allocate a RREQ packet 
@@ -1170,9 +1270,17 @@ aodv_rt_entry *rt = rtable.rt_lookup(dst);
  assert ((seqno%2) == 0);
  rq->rq_src_seqno = seqno;
  rq->rq_timestamp = CURRENT_TIME;
-
- Scheduler::instance().schedule(target_, p, 0.);
-
+	if(nIfaces) {
+		for(int i=0; i<nIfaces; i++) {
+			Packet* p_copy = p->copy();
+			Scheduler::instance().schedule(targetlist[i], p_copy, 0.0);
+		}
+		Packet::free(p);
+	}
+	else
+	{
+		Scheduler::instance().schedule(target_, p, 0.0);
+	}
 }
 
 void
@@ -1214,8 +1322,16 @@ fprintf(stderr, "sending Reply from %d at %.2f\n", index, Scheduler::instance().
  ih->dport() = RT_PORT;
  ih->ttl_ = NETWORK_DIAMETER;
 
- Scheduler::instance().schedule(target_, p, 0.); //pass p to the object of Class LL
-
+ //Scheduler::instance().schedule(target_, p, 0.); //pass p to the object of Class LL
+ //Listing 5.14 Changes on the sendReply method
+ if(nIfaces)
+ {
+ 	Scheduler::instance().schedule(targetlist[rt->rt_interface], p, 0);
+ }
+ else
+ {
+ 	Scheduler::instance().schedule(target_, p, 0);
+ }
 }
 
 void
@@ -1250,10 +1366,33 @@ fprintf(stderr, "sending Error from %d at %.2f\n", index, Scheduler::instance().
 
  // Do we need any jitter? Yes
  if (jitter)
- 	Scheduler::instance().schedule(target_, p, 0.01*Random::uniform());
+ {
+	 if(nIfaces) {
+		 for(int i=0; i<nIfaces; i++) {
+			 Packet* p_copy = p->copy();
+			 Scheduler::instance().schedule(targetlist[i], p_copy, 0.01*Random::uniform());
+		 }
+		 Packet::free(p);
+	 }
+	 else
+	 {
+		 Scheduler::instance().schedule(target_, p, 0.01*Random::uniform());
+	 }
+ }
  else
- 	Scheduler::instance().schedule(target_, p, 0.0);
-
+ {
+	 if(nIfaces) {
+		 for(int i=0; i<nIfaces; i++) {
+			 Packet* p_copy = p->copy();
+			 Scheduler::instance().schedule(targetlist[i], p_copy, 0.0);
+		 }
+		 Packet::free(p);
+	 }
+	 else
+	 {
+		 Scheduler::instance().schedule(target_, p, 0.0);
+	 }
+ }	
 }
 
 
@@ -1287,13 +1426,18 @@ fprintf(stderr, "sending Hello from %d at %.2f\n", index, Scheduler::instance().
  ch->addr_type() = NS_AF_NONE;
  ch->prev_hop_ = index;          // AODV hack
 
- ih->saddr() = index;
- ih->daddr() = IP_BROADCAST;
- ih->sport() = RT_PORT;
- ih->dport() = RT_PORT;
- ih->ttl_ = 1;
+ if(nIfaces) {
+	 for(int i=0; i<nIfaces; i++) {
+		 Packet* p_copy = p->copy();
+		 Scheduler::instance().schedule(targetlist[i], p_copy, 0.0);
+	 }
+	 Packet::free(p);
+ }
+ else
+ {
+	 Scheduler::instance().schedule(target_, p, 0.0);
+ }
 
- Scheduler::instance().schedule(target_, p, 0.0);
 }
 
 

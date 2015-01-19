@@ -44,6 +44,7 @@ int i;
 
  rt_dst = 0;
  rt_seqno = 0;
+ rt_interface = 255;
  rt_hops = rt_last_hop_count = INFINITY2;
  rt_nexthop = 0;
  LIST_INIT(&rt_pclist);

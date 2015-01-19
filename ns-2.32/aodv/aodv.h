@@ -122,6 +122,11 @@ class AODV;
 #define MaxHelloInterval        (1.25 * HELLO_INTERVAL)
 #define MinHelloInterval        (0.75 * HELLO_INTERVAL)
 
+//Listing 5.6 Declaring the MAX_IF constant
+/*We declare the maximum number of interfaces*/
+#define MAX_IF 11
+
+
 /*
   Timers (Broadcast ID, Hello, Neighbor Cache, Route Cache)
 */
@@ -217,9 +222,10 @@ class AODV: public Agent {
          * Route Table Management
          */
         void            rt_resolve(Packet *p);
-        void            rt_update(aodv_rt_entry *rt, u_int32_t seqnum,
+		//Listing 5.8 New members of the AODV class
+		void            rt_update(aodv_rt_entry *rt, u_int32_t seqnum,
 		     	  	u_int16_t metric, nsaddr_t nexthop,
-		      		double expire_time);
+		      		double expire_time, u_int8_t interface);
         void            rt_down(aodv_rt_entry *rt);
         void            local_rt_repair(aodv_rt_entry *rt, Packet *p);
  public:
@@ -324,6 +330,11 @@ class AODV: public Agent {
 	/* for passing packets up to agents */
 	PortClassifier *dmux_;
 
+	//Listing 5.7 New members of the AODV class
+	// New members required for the multi-interface extension
+	int nIfaces;
+	NsObject *targetlist[MAX_IF];
+	PriQueue *ifqueuelist[MAX_IF];
 };
 
 #endif /* __aodv_h__ */

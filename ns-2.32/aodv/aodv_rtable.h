@@ -103,7 +103,7 @@ class aodv_rt_entry {
 
         nsaddr_t        rt_dst;
         u_int32_t       rt_seqno;
-	/* u_int8_t 	rt_interface; */
+		u_int8_t 	rt_interface;
         u_int16_t       rt_hops;       		// hop count
 	int 		rt_last_hop_count;	// last valid hop count
         nsaddr_t        rt_nexthop;    		// next hop IP address
